@@ -8,7 +8,7 @@ on:
 env:
   MAIN_BRANCH_URL: "https://raw.githubusercontent.com/liquidcarbon/puppy/main/"
   PYTHONIOENCODING: "utf8" # https://github.com/pallets/click/issues/2121
-  PATH: "C:\\Users\\runneradmin\\.pixi\\bin" # Adding this should be sufficient unless something else is causing issues
+  PATH: "C:\\Users\\runneradmin\\.pixi\\bin" # Existing PATH for your workflow
 
 jobs:
   puppy-win-311:
@@ -20,11 +20,12 @@ jobs:
           Set-ExecutionPolicy Bypass -Scope Process -Force;  # Allow script execution
           iwr https://community.chocolatey.org/install.ps1 -UseBasicP | iex  # Download and install Chocolatey
 
-      - name: Ensure Chocolatey is in PATH
+      - name: Add Chocolatey to PATH and verify installation
         run: |
-          # Add Chocolatey to the PATH explicitly for this session
+          # Ensure Chocolatey is in the PATH for the current session
           $env:Path += ";C:\ProgramData\chocolatey\bin"
-          echo $env:Path  # Print out PATH to verify it's added correctly
+          # Verify that Chocolatey is now recognized by running choco --version
+          choco --version
 
       - name: Install Git using Chocolatey
         run: |
