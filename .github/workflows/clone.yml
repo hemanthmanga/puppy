@@ -19,12 +19,14 @@ jobs:
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force;  # Allow script execution
           iwr https://community.chocolatey.org/install.ps1 -UseBasicP | iex  # Download and install Chocolatey
-
+          
       - name: Add Chocolatey to PATH and verify installation
         run: |
-          # Ensure Chocolatey is in the PATH for the current session
+          # Add Chocolatey to the PATH for the current session
           $env:Path += ";C:\ProgramData\chocolatey\bin"
-          # Verify that Chocolatey is now recognized by running choco --version
+          # Make sure the new PATH is reflected
+          echo $env:Path
+          # Verify if choco is available
           choco --version
 
       - name: Install Git using Chocolatey
