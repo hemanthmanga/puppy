@@ -37,7 +37,6 @@ jobs:
       - name: pup clone
         run: |
           pup clone https://github.com/liquidcarbon/affinity.git
-          git clone https://github.com/liquidcarbon/affinity.git
           pup new affinity
           pixi run uv sync --project affinity
           pup list
