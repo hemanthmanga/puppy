@@ -19,8 +19,11 @@ jobs:
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force;  # Allow script execution
           iwr https://community.chocolatey.org/install.ps1 -UseBasicP | iex  # Download and install Chocolatey
-      - name: check PATH, install git
-        run: choco install git -y; echo $PATH; echo $GITHUB_ENV
+      - name: Install Git using Chocolatey
+        run: |
+          choco install git -y
+          choco --version
+          echo $env:PATH
       - name: Install puppy 3.11
         run: |
           sleep 9;  # give it time to update MAIN_BRANCH_URL
